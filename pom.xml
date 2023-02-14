@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This file is part of Akira-UHC.
+  ~
+  ~ Copyright © 2023, Rhodless. All rights reserved.
+  ~
+  ~ Unauthorized using, copying, modifying and/or distributing of this file,
+  ~ via any medium is strictly prohibited. This code is confidential.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fr.rhodless</groupId>
+    <artifactId>akira-api</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/Rhodless/Menu-API/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.rhodless</groupId>
+            <artifactId>menu-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>akira-api</name>
+            <url>https://maven.pkg.github.com/Rhodless/Akira-API/</url>
+        </repository>
+    </distributionManagement>
+</project>
