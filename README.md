@@ -22,7 +22,7 @@ Exemple de fichier `settings.xml`
   
   <servers>
     <server>
-      <id>kohei</id>
+      <id>akira</id>
       <username>Rhodless</username>
       <password>mon_super_token</password>
     </server>
@@ -35,7 +35,7 @@ Exemple de fichier `settings.xml`
  
 ```xml
 <repository>
-  <id>fr.rhodless</id>
+  <id>akira</id>
   <url>https://maven.pkg.github.com/Rhodless/AKIRA-API</url>
 </repository>
 ```
