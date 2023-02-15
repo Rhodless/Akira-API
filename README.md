@@ -1,6 +1,6 @@
 # Akira-API
 
-<h2><img height="20" src="/img/whatissurreal.svg">&nbsp;&nbsp;C'est quoi AKIRA ?</h2>
+<h2><!--<img height="20" src="">&nbsp;&nbsp;-->C'est quoi AKIRA ?</h2>
 AKIRA vous propose une API très complète pour créer des modes de jeu UHC personnalisés selon vos besoins. Vous pouvez facilement faire tout et n'importe quoi, que ce soit créer des rôles ou des pouvoirs. Tout est entièrement modifiable pour s'adapter à vos préférences.
 <br><br>
 L'UHC est à 90% configurable, avec des options pour les messages dans le chat, les items dans le lobby, les NPC, et bien plus encore. Vous avez le contrôle total de l'UHC.
