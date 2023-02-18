@@ -6,6 +6,7 @@ import fr.rhodless.akira.uhc.api.player.info.death.ProfileDeathProcess;
 import fr.rhodless.akira.uhc.api.player.info.plate.ProfileTeleportPlate;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nullable;
@@ -259,6 +260,13 @@ public interface ProfileInfo {
     void handleDeath(Player killer, boolean disconnect);
 
     /**
+     * @param killer        Le joueur qui a tué le joueur
+     * @param disconnect    Si le joueur est mort à cause d'une déconnexion
+     * @param announceAfter Combien de temps après la mort doit être envoyé l'annonce de mort
+     */
+    void handleDeath(Player killer, boolean disconnect, int announceAfter);
+
+    /**
      * Methode appelée lorsqu'un joueur meurt (sans déconnexion).
      *
      * @param killer Le joueur qui a tué le joueur
@@ -305,4 +313,106 @@ public interface ProfileInfo {
      * @return true si le joueur est vivant, false sinon
      */
     boolean isAlive();
+
+    /**
+     * Permet d'enlever des cœurs à un joueur.
+     * Cette méthode enlève les cœurs d'absorption avant de retirer les cœurs de vie
+     * et envoie une animation de dégâts au joueur.
+     *
+     * @param health le nombre de cœurs à retirer.
+     */
+    void removeHealth(float health);
+
+    /**
+     * Permet de récupérer le nombre de cœurs restants au joueur.
+     * Cette méthode prend en compte les cœurs d'absorption.
+     *
+     * @return le nombre de cœurs restants au joueur
+     */
+    double getHealth();
+
+    /**
+     * Permet d'ajouter des cœurs à un joueur.
+     *
+     * @param health le nombre de cœurs à ajouter
+     */
+    void addHealth(float health);
+
+    /**
+     * Permet de récupérer le nombre de cœurs d'absorption restants au joueur.
+     *
+     * @return le nombre de cœurs d'absorption restants au joueur
+     */
+    float getAbsorptionHearts();
+
+    /**
+     * Permet d'ajouter des cœurs d'absorption à un joueur.
+     *
+     * @param health le nombre de cœurs d'absorption à ajouter
+     */
+    void addAbsorptionHearts(float health);
+
+    /**
+     * Permet de définir le nombre de cœurs d'absorption d'un joueur.
+     *
+     * @param health le nombre de cœurs d'absorption à définir
+     */
+    void setAbsorptionHearts(float health);
+
+    /**
+     * Permet de rendre le joueur invulnérable à un dégât pendant un certain temps.
+     *
+     * @param cause   le type de dégâts
+     * @param seconds le nombre de secondes pendant lesquelles le joueur est invulnérable
+     */
+    void addDamageInvulnerability(EntityDamageEvent.DamageCause cause, int seconds);
+
+    /**
+     * Permet de rendre le joueur invulnérable à un dégât pendant un certain temps.
+     *
+     * @param seconds le nombre de secondes pendant lesquelles le joueur ne peut frapper personne
+     */
+    void removeDamageAbility(int seconds);
+
+    /**
+     * Permet de désactiver l'accès aux pouvoirs du joueur
+     */
+    void disablePowers();
+
+    /**
+     * Permet d'activer l'accès aux pouvoirs du joueur
+     */
+    void enablePowers();
+
+    /**
+     * Permet de récupérer si le joueur peut utiliser ses pouvoirs.
+     *
+     * @return true si le joueur peut utiliser ses pouvoirs, false sinon
+     */
+    boolean canUsePowers();
+
+    /**
+     * Permet d'immobiliser le joueur
+     */
+    void stun();
+
+    /**
+     * Permet de rendre le joueur mobile
+     */
+    void unStun();
+
+    /**
+     * Les points ne sont pas utilisés par le plugin, mais peuvent être utilisés par les autres plugins.
+     * Vous pouvez par exemple utiliser les points pour définir une particularité pour un mode de jeu.
+     *
+     * @return le nombre de points du joueur
+     */
+    int getPoints();
+
+    /**
+     * Les points ne sont pas utilisés par le plugin, mais peuvent être utilisés par les autres plugins.
+     *
+     * @param points le nombre de points du joueur
+     */
+    void setPoints(int points);
 }

@@ -6,6 +6,7 @@ import fr.rhodless.akira.uhc.api.player.info.ProfileInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,10 +19,25 @@ import java.util.List;
  * via any medium is strictly prohibited. This code is confidential.
  */
 public abstract class Power {
+    private final List<RestrictionType> restrictions = new ArrayList<>();
     private final Cooldown cooldown = new Cooldown(this.getPowerName(), null);
-    private int cooldownAmount = 0;
-    private int maxUses = 0;
+
+    private int cooldownAmount;
+    private int maxUses;
     private int uses = 0;
+
+    public Power(int cooldown, int maxUses) {
+        this.cooldownAmount = cooldown;
+        this.maxUses = maxUses;
+
+        if (cooldownAmount != -1) {
+            this.restrictions.add(RestrictionType.COOLDOWN);
+        }
+
+        if (this.maxUses != -1) {
+            this.restrictions.add(RestrictionType.USES);
+        }
+    }
 
     /**
      * Permet de récupérer le nom du pouvoir
@@ -29,13 +45,6 @@ public abstract class Power {
      * @return le nom du pouvoir
      */
     public abstract String getPowerName();
-
-    /**
-     * Permet de récupérer les restrictions du pouvoir.
-     *
-     * @return les restrictions du pouvoir
-     */
-    public abstract List<RestrictionType> getRestrictions();
 
     /**
      * Methode executée lors de l'utilisation du pouvoir
@@ -53,6 +62,15 @@ public abstract class Power {
      */
     public boolean hasRestriction(RestrictionType restriction) {
         return getRestrictions().contains(restriction);
+    }
+
+    /**
+     * Permet de récupérer les restrictions du pouvoir.
+     *
+     * @return les restrictions du pouvoir
+     */
+    public List<RestrictionType> getRestrictions() {
+        return this.restrictions;
     }
 
     /**
@@ -92,38 +110,6 @@ public abstract class Power {
      */
     protected List<RestrictionType> of(RestrictionType... types) {
         return Arrays.asList(types);
-    }
-
-    /**
-     * Permet de créer une restriction de cooldown.
-     *
-     * @param cooldown le cooldown
-     * @return la restriction
-     */
-    protected RestrictionType withCooldown(int cooldown) {
-        this.setCooldownAmount(cooldown);
-        return RestrictionType.COOLDOWN;
-    }
-
-
-    /**
-     * Permet de créer une restriction d'utilisations.
-     *
-     * @param maxUses le nombre d'utilisations
-     * @return la restriction
-     */
-    protected RestrictionType withMaxUses(int maxUses) {
-        this.setMaxUses(maxUses);
-        return RestrictionType.USES;
-    }
-
-    /**
-     * Permet de créer une resitrcition d'utilisation unique.
-     *
-     * @return la restriction
-     */
-    protected RestrictionType withSingleUse() {
-        return withMaxUses(1);
     }
 
     /**

@@ -3,6 +3,7 @@ package fr.rhodless.akira.uhc.api.module.role;
 import fr.rhodless.akira.uhc.api.API;
 import fr.rhodless.akira.uhc.api.module.camp.Camp;
 import fr.rhodless.akira.uhc.api.module.power.Power;
+import fr.rhodless.akira.uhc.api.player.PlayerHandler;
 import fr.rhodless.akira.uhc.api.player.info.ProfileInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,7 +13,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 /*
  * This file is part of Akira-UHC.
@@ -68,10 +69,12 @@ public abstract class Role implements Listener {
      * @return le camp du rôle
      */
     public Camp getCamp() {
-        return API.getModuleHandler().getCurrentModule().getCamps().stream()
-                .filter(camp -> camp.getClass().equals(this.getCampClass()))
-                .findFirst()
-                .orElse(null);
+        for (Camp camp : API.getModuleHandler().getCurrentModule().getCamps()) {
+            if (camp.getClass().equals(this.getCampClass())) {
+                return camp;
+            }
+        }
+        return null;
     }
 
     /**
@@ -176,7 +179,28 @@ public abstract class Role implements Listener {
      */
     @Nullable
     protected Player getPlayer() {
-        return API.getGameHandler().getPlayers().stream().filter(uuid -> Bukkit.getPlayer(uuid) != null).map(Bukkit::getPlayer).filter(player -> equals(API.getPlayerHandler().getProfile(player).getRole())).findFirst().orElse(null);
+        PlayerHandler playerHandler = API.getPlayerHandler();
+        for (UUID uuid : API.getGameHandler().getPlayers()) {
+            if (Bukkit.getPlayer(uuid) != null) {
+                Player player = Bukkit.getPlayer(uuid);
+                ProfileInfo profile = playerHandler.getProfile(player);
+                if (profile.getRole() != null) {
+                    if (profile.getRole().getName().equals(this.getName())) {
+                        return profile.getPlayer();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Permet de récupérer le profil du joueur possédant ce rôle
+     *
+     * @return le profil du joueur possédant ce rôle
+     */
+    protected ProfileInfo getProfile() {
+        return API.getPlayerHandler().getProfile(getPlayer());
     }
 
     /**
@@ -188,7 +212,7 @@ public abstract class Role implements Listener {
     protected boolean isRole(Player player) {
         ProfileInfo profile = API.getPlayerHandler().getProfile(player);
 
-        return profile.getRole() != null && profile.getRole().equals(this);
+        return profile.getRole() != null && profile.getRole().getName().equals(this.getName());
     }
 
     /**
@@ -201,21 +225,37 @@ public abstract class Role implements Listener {
         return player.getItemInHand() != null && player.getItemInHand().getType().name().contains("SWORD");
     }
 
+    @Nullable
+    @Deprecated
+    public static ProfileInfo findPlayer(QuickRoleInfo info) {
+        for (UUID uuid : API.getGameHandler().getPlayers()) {
+            ProfileInfo profile = API.getPlayerHandler().getProfile(uuid);
+            if (profile != null) {
+                if (profile.getRole() != null && profile.getRole().getClass().getSimpleName().equals(info.getRoleClass().getSimpleName())) {
+                    return profile;
+                }
+            }
+        }
+        return null;
+    }
+
     /**
-     * Permet de récupérer un joueur possédant un rôle
+     * Permet de récupérer les joueurs possédant un rôle
      *
      * @param info le rôle à trouver
-     * @return le joueur possédant le rôle
+     * @return les joueurs possédant le rôle
      */
-    @Nullable
-    public static Player findPlayer(QuickRoleInfo info) {
-        return API.getGameHandler().getPlayers().stream()
-                .filter(uuid -> Bukkit.getPlayer(uuid) != null)
-                .map(Bukkit::getPlayer)
-                .map(player -> API.getPlayerHandler().getProfile(player))
-                .filter(profile -> profile.getRole() != null && profile.getRole().getClass().getSimpleName().equals(info.getRole().getSimpleName()))
-                .map(ProfileInfo::getPlayer)
-                .findFirst().orElse(null);
+    public static List<ProfileInfo> findPlayers(QuickRoleInfo info) {
+        List<ProfileInfo> list = new ArrayList<>();
+        for (UUID uuid : API.getGameHandler().getPlayers()) {
+            ProfileInfo profile = API.getPlayerHandler().getProfile(uuid);
+            if (profile != null) {
+                if (profile.getRole() != null && profile.getRole().getClass().getSimpleName().equals(info.getRoleClass().getSimpleName())) {
+                    list.add(profile);
+                }
+            }
+        }
+        return list;
     }
 
     /**
@@ -226,23 +266,34 @@ public abstract class Role implements Listener {
      * @return true si le joueur possède le rôle
      */
     public static boolean isRole(Player player, QuickRoleInfo info) {
-        Player found = findPlayer(info);
-        if (found == null) return false;
+        for (ProfileInfo profileInfo : findPlayers(info)) {
+            if (profileInfo.getUniqueId().equals(player.getUniqueId())) {
+                return true;
+            }
+        }
 
-        return player.getUniqueId().equals(found.getUniqueId());
+        return false;
     }
 
     /**
      * Permet d'envoyer à un joueur l'identité d'un autre joueur possédant un rôle particulier
      *
      * @param player le joueur
-     * @param role   le rôle
+     * @param info   le rôle
      */
-    public static void knowsRole(Player player, QuickRoleInfo role) {
-        Player target = findPlayer(role);
-        if (target == null) return;
+    public static void knowsRole(Player player, QuickRoleInfo info) {
+        List<String> foundPlayers = new ArrayList<>();
+        for (ProfileInfo profileInfo : findPlayers(info)) {
+            foundPlayers.add(profileInfo.getName());
+        }
+        if (foundPlayers.isEmpty()) return;
 
-        player.sendMessage(API.getPrefixHandler().prefix("&7Le &c" + role.getName() + " &7de la partie est &a" + target.getName()));
+        String nameDisplay = String.join("&7, &a", foundPlayers);
+        if (foundPlayers.size() > 1) {
+            player.sendMessage(API.getPrefixHandler().prefix("&7Le &c" + info.getName() + " &7de la partie est &a" + nameDisplay));
+        } else {
+            player.sendMessage(API.getPrefixHandler().prefix("&7Les &c" + info.getName() + "s &7de la partie sont &a" + nameDisplay));
+        }
     }
 
     /**
@@ -251,14 +302,17 @@ public abstract class Role implements Listener {
      * @param camp le camp
      * @return la liste des joueurs dans le camp
      */
-    public static List<Player> getPlayersInCamp(Camp camp) {
-        return API.getGameHandler().getPlayers().stream()
-                .filter(uuid -> Bukkit.getPlayer(uuid) != null)
-                .map(Bukkit::getPlayer)
-                .map(player -> API.getPlayerHandler().getProfile(player))
-                .filter(profile -> profile.getCamp() != null && profile.getCamp().equals(camp))
-                .map(ProfileInfo::getPlayer)
-                .collect(Collectors.toList());
+    public static List<ProfileInfo> getPlayersInCamp(Camp camp) {
+        List<ProfileInfo> list = new ArrayList<>();
+        for (UUID player : API.getGameHandler().getPlayers()) {
+            ProfileInfo profile = API.getPlayerHandler().getProfile(player);
+            if (profile != null) {
+                if (profile.getCamp() != null && profile.getCamp().equals(camp)) {
+                    list.add(profile);
+                }
+            }
+        }
+        return list;
     }
 
     /**
@@ -269,7 +323,12 @@ public abstract class Role implements Listener {
      * @return le pouvoir
      */
     public <T extends Power> T getPower(Class<T> power) {
-        return this.powers.stream().filter(power1 -> power1.getClass().getSimpleName().equals(power.getSimpleName())).map(power::cast).findFirst().orElse(null);
+        for (Power power1 : this.powers) {
+            if (power1.getClass().getSimpleName().equals(power.getSimpleName())) {
+                return power.cast(power1);
+            }
+        }
+        return null;
     }
 
     /**

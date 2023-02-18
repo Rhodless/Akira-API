@@ -7,7 +7,6 @@ import fr.rhodless.akira.uhc.api.game.scenario.ScenarioHandler;
 import fr.rhodless.akira.uhc.api.game.start.StartHandler;
 import fr.rhodless.akira.uhc.api.game.state.GameState;
 import fr.rhodless.akira.uhc.api.module.win.WinHandler;
-import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.UUID;
@@ -164,65 +163,4 @@ public interface GameHandler {
      * @param chat true si le chat est activé.
      */
     void setChat(boolean chat);
-
-    /**
-     * Permet d'enlever des cœurs à un joueur.
-     * Cette méthode enlève les cœurs d'absorption avant de retirer les coeurs de vie
-     * et envoie une animation de dégâts au joueur.
-     *
-     * @param player le joueur.
-     * @param health le nombre de coeur à retirer.
-     */
-    void removeHealth(Player player, float health);
-
-    /**
-     * Permet de récupérer la liste des joueurs qui ne peuvent plus utiliser de pouvoirs.
-     *
-     * @return la liste des joueurs qui ne peuvent plus utiliser de pouvoirs
-     */
-    List<UUID> getDisabledPlayers();
-
-    /**
-     * Permet de récupérer si un joueur ne peut plus utiliser de pouvoirs.
-     *
-     * @param player le joueur
-     * @return true si le joueur ne peut plus utiliser de pouvoirs
-     */
-    boolean isDisabled(Player player);
-
-    /**
-     * Permet de définir si un joueur ne peut plus utiliser de pouvoirs.
-     *
-     * @param player le joueur
-     */
-    void setDisabled(Player player);
-
-    /**
-     * Permet de redonner la possibilité à un joueur de pouvoir utiliser des pouvoirs.
-     *
-     * @param player le joueur
-     */
-    void unsetDisabled(Player player);
-
-    /**
-     * Permet de récupérer la liste des joueurs qui ne peuvent plus bouger.
-     *
-     * @return la liste des joueurs qui ne peuvent plus bouger.
-     */
-    List<UUID> getStunPlayers();
-
-    /**
-     * Permet d'empêcher un joueur de bouger pendant un certain temps.
-     *
-     * @param player  le joueur
-     * @param seconds le nombre de secondes pendant lesquelles le joueur ne pourra pas bouger.
-     */
-    void stunPlayer(Player player, int seconds);
-
-    /**
-     * Permet de récupérer la liste des joueurs qui sont insensible aux effets de stun.
-     *
-     * @return la liste des joueurs qui sont insensible aux effets de stun.
-     */
-    List<UUID> getStunResistantPlayers();
 }

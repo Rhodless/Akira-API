@@ -13,4 +13,7 @@ package fr.rhodless.akira.uhc.api.module.power.defaults;
  * Ce pouvoir s'active lorsque le joueur fait un clic droit avec l'item
  */
 public abstract class RightClickPower extends ItemPower {
+    public RightClickPower(int cooldown, int maxUses) {
+        super(cooldown, maxUses);
+    }
 }

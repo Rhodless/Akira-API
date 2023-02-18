@@ -17,6 +17,10 @@ import fr.rhodless.akira.uhc.api.module.power.Power;
 public abstract class CommandPower extends Power {
     private String[] args;
 
+    public CommandPower(int cooldown, int maxUses) {
+        super(cooldown, maxUses);
+    }
+
     /**
      * Permet de récupérer l'argument de la commande.
      *

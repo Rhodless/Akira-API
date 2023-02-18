@@ -48,7 +48,7 @@ public interface Scenario extends Listener {
      *
      * @return true si le scénario reste activé après le pvp
      */
-    boolean afterPvP();
+    boolean isEnabledAfterPvP();
 
     /**
      * Cette méthode est appelée lors du début de la partie.

@@ -12,22 +12,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fr.rhodless</groupId>
-    <artifactId>akira-api</artifactId>
-    <version>1.0.0</version>
+    <groupId>fr.rhodless.akira</groupId>
+    <artifactId>uhc-api</artifactId>
+    <version>1.0.2</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/Rhodless/Menu-API/</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -36,7 +29,7 @@
             <version>1.8.8-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>fr.rhodless</groupId>
+            <groupId>fr.rhodless.akira</groupId>
             <artifactId>menu-api</artifactId>
             <version>1.0.0</version>
         </dependency>
@@ -44,9 +37,39 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
-            <name>akira-api</name>
-            <url>https://maven.pkg.github.com/Rhodless/Akira-API/</url>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
         </repository>
     </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -2,7 +2,7 @@ package fr.rhodless.akira.uhc.api;
 
 import fr.rhodless.akira.uhc.api.command.CommandHandler;
 import fr.rhodless.akira.uhc.api.game.GameHandler;
-import fr.rhodless.akira.uhc.api.hotbar.ActionBarHandler;
+import fr.rhodless.akira.uhc.api.actionbar.ActionBarHandler;
 import fr.rhodless.akira.uhc.api.item.ItemHandler;
 import fr.rhodless.akira.uhc.api.module.ModuleHandler;
 import fr.rhodless.akira.uhc.api.npc.NPCHandler;
@@ -107,12 +107,12 @@ public class API {
     }
 
     /**
-     * Permet de récupérer le gestionnaire de hotbar.
+     * Permet de récupérer le gestionnaire de l'actionbar.
      *
-     * @return le gestionnaire de hotbar
+     * @return le gestionnaire d'actionbar
      */
-    public static ActionBarHandler getHotBarHandler() {
-        return implementation.getHotBarHandler();
+    public static ActionBarHandler getActionBarHandler() {
+        return implementation.getActionBarHandler();
     }
 
     /**
@@ -159,7 +159,7 @@ public class API {
 
         TabListHandler getTabListHandler();
 
-        ActionBarHandler getHotBarHandler();
+        ActionBarHandler getActionBarHandler();
 
         PrefixHandler getPrefixHandler();
 

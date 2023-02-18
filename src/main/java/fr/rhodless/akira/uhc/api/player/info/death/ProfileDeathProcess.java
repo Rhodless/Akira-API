@@ -35,4 +35,18 @@ public interface ProfileDeathProcess {
      * Permet de terminer le processus de mort. Le joueur sera donc définitivement mort.
      */
     void end();
+
+    /**
+     * Permet de définir combien de temps après la mort l'annonce de mort est envoyée
+     *
+     * @param seconds combien de temps après la mort l'annonce de mort est envoyée
+     */
+    void setAnnounceAfter(int seconds);
+
+    /**
+     * Permet de récupérer combien de temps après la mort l'annonce de mort est envoyée
+     *
+     * @return combien de temps après la mort l'annonce de mort est envoyée
+     */
+    int getAnnounceAfter();
 }

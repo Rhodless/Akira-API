@@ -15,6 +15,10 @@ import org.bukkit.inventory.ItemStack;
  * via any medium is strictly prohibited. This code is confidential.
  */
 public abstract class ItemPower extends Power {
+    public ItemPower(int cooldown, int maxUses) {
+        super(cooldown, maxUses);
+    }
+
     /**
      * @return l'item qui permet d'activer le pouvoir
      */

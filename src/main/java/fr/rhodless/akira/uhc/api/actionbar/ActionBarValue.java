@@ -1,4 +1,4 @@
-package fr.rhodless.akira.uhc.api.hotbar;
+package fr.rhodless.akira.uhc.api.actionbar;
 
 /*
  * This file is part of Akira-UHC.

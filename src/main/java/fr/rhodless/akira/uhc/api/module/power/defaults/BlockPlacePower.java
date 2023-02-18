@@ -13,4 +13,7 @@ package fr.rhodless.akira.uhc.api.module.power.defaults;
  * Ce pouvoir s'active lorsque le joueur pose un bloc avec l'item
  */
 public abstract class BlockPlacePower extends ItemPower {
+    public BlockPlacePower(int cooldown, int maxUses) {
+        super(cooldown, maxUses);
+    }
 }

@@ -17,6 +17,10 @@ import org.bukkit.entity.Player;
 public abstract class PlayerDamagePower extends ItemPower {
     private Player target;
 
+    public PlayerDamagePower(int cooldown, int maxUses) {
+        super(cooldown, maxUses);
+    }
+
     /**
      * Permet de récupérer le joueur ciblé
      *

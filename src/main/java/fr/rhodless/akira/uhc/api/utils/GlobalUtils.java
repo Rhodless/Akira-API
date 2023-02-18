@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /*
  * This file is part of Akira-UHC.
@@ -109,46 +109,66 @@ public class GlobalUtils {
 
     public static List<Player> getNearbyPlayers(final Location loc, final double radius, Player... exclude) {
         List<Player> toExclude = new ArrayList<>(Arrays.asList(exclude));
-        return loc.getWorld().getNearbyEntities(loc, radius, radius, radius).stream()
-                .filter(entity -> entity instanceof Player)
-                .map(entity -> (Player) entity)
-                .filter(player -> API.getGameHandler().getPlayers().contains(player.getUniqueId()) &&
+        List<Player> list = new ArrayList<>();
+        for (Entity entity : loc.getWorld().getNearbyEntities(loc, radius, radius, radius)) {
+            if (entity instanceof Player) {
+                Player player = (Player) entity;
+                if (API.getGameHandler().getPlayers().contains(player.getUniqueId()) &&
                         !toExclude.contains(player) &&
-                        player.getGameMode() == GameMode.SURVIVAL)
-                .collect(Collectors.toList());
+                        player.getGameMode() == GameMode.SURVIVAL) {
+                    list.add(player);
+                }
+            }
+        }
+        return list;
     }
 
     public static List<Player> getNearbyPlayersUUID(final Location loc, final double radius, UUID... exclude) {
         List<UUID> toExclude = new ArrayList<>(Arrays.asList(exclude));
-        return loc.getWorld().getNearbyEntities(loc, radius, radius, radius).stream()
-                .filter(entity -> entity instanceof Player)
-                .map(entity -> (Player) entity)
-                .filter(player -> API.getGameHandler().getPlayers().contains(player.getUniqueId()) &&
+        List<Player> list = new ArrayList<>();
+        for (Entity entity : loc.getWorld().getNearbyEntities(loc, radius, radius, radius)) {
+            if (entity instanceof Player) {
+                Player player = (Player) entity;
+                if (API.getGameHandler().getPlayers().contains(player.getUniqueId()) &&
                         !toExclude.contains(player.getUniqueId()) &&
-                        player.getGameMode() == GameMode.SURVIVAL)
-                .collect(Collectors.toList());
+                        player.getGameMode() == GameMode.SURVIVAL) {
+                    list.add(player);
+                }
+            }
+        }
+        return list;
     }
 
     public static List<Player> getNearbyPlayersUUID(final Player p, final double radius, UUID... exclude) {
         List<UUID> toExclude = new ArrayList<>(Arrays.asList(exclude));
-        return p.getNearbyEntities(radius, radius, radius).stream()
-                .filter(entity -> entity instanceof Player)
-                .map(entity -> (Player) entity)
-                .filter(player -> API.getGameHandler().getPlayers().contains(player.getUniqueId()) &&
+        List<Player> list = new ArrayList<>();
+        for (Entity entity : p.getNearbyEntities(radius, radius, radius)) {
+            if (entity instanceof Player) {
+                Player player = (Player) entity;
+                if (API.getGameHandler().getPlayers().contains(player.getUniqueId()) &&
                         !toExclude.contains(player.getUniqueId()) &&
-                        player.getGameMode() == GameMode.SURVIVAL)
-                .collect(Collectors.toList());
+                        player.getGameMode() == GameMode.SURVIVAL) {
+                    list.add(player);
+                }
+            }
+        }
+        return list;
     }
 
     public static List<Player> getNearbyPlayers(final Player playerToLook, final double radius, Player... exclude) {
         List<Player> toExclude = new ArrayList<>(Arrays.asList(exclude));
-        return playerToLook.getNearbyEntities(radius, radius, radius).stream()
-                .filter(entity -> entity instanceof Player)
-                .map(entity -> (Player) entity)
-                .filter(player -> API.getGameHandler().getPlayers().contains(player.getUniqueId()) &&
+        List<Player> list = new ArrayList<>();
+        for (Entity entity : playerToLook.getNearbyEntities(radius, radius, radius)) {
+            if (entity instanceof Player) {
+                Player player = (Player) entity;
+                if (API.getGameHandler().getPlayers().contains(player.getUniqueId()) &&
                         !toExclude.contains(player) &&
-                        player.getGameMode() == GameMode.SURVIVAL)
-                .collect(Collectors.toList());
+                        player.getGameMode() == GameMode.SURVIVAL) {
+                    list.add(player);
+                }
+            }
+        }
+        return list;
     }
 
     public static List<Location> generateSphere(final Location centerBlock, final int radius, final boolean hollow) {

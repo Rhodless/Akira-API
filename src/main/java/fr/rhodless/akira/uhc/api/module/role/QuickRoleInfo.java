@@ -15,19 +15,19 @@ public class QuickRoleInfo {
     private final String name;
     private final ItemStack display;
     private final Camp camp;
-    private final Class<? extends Role> role;
+    private final Class<? extends Role> roleClass;
 
     /**
      * @param name    le nom du rôle
      * @param display l'item qui représente le rôle
      * @param camp    le camp du rôle
-     * @param role    la classe du rôle
+     * @param roleClass    la classe du rôle
      */
-    public QuickRoleInfo(String name, ItemStack display, Camp camp, Class<? extends Role> role) {
+    public QuickRoleInfo(String name, ItemStack display, Camp camp, Class<? extends Role> roleClass) {
         this.name = name;
         this.display = display;
         this.camp = camp;
-        this.role = role;
+        this.roleClass = roleClass;
     }
 
     /**
@@ -62,7 +62,7 @@ public class QuickRoleInfo {
      *
      * @return la classe du rôle
      */
-    public Class<? extends Role> getRole() {
-        return role;
+    public Class<? extends Role> getRoleClass() {
+        return roleClass;
     }
 }

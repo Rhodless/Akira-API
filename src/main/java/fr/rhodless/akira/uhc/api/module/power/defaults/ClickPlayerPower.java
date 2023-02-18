@@ -15,7 +15,11 @@ import org.bukkit.entity.Player;
  * Ce pouvoir s'active lorsque le joueur clique sur un joueur avec l'item
  */
 public abstract class ClickPlayerPower extends ItemPower {
-    private Player target; 
+    private Player target;
+
+    public ClickPlayerPower(int cooldown, int maxUses) {
+        super(cooldown, maxUses);
+    }
 
     /**
      * @return la distance maximale pour le click
