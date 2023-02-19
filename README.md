@@ -17,7 +17,7 @@
 <p align="center">
     <a href="#"><img src="https://img.shields.io/github/v/release/rhodless/akira-api?color=f58a42&include_prereleases&label=version&sort=semver&style=flat-square"></a>
     &nbsp;
-    <a href="#"><img src="https://img.shields.io/badge/built_with-Java-dca282.svg?style=flat-square"></a>
+    <a href="#"><img src="https://img.shields.io/badge/built_with-maven-dca282.svg?style=flat-square"></a>
     &nbsp;
     <a href="https://github.com/surrealdb/surrealdb/actions"><img src="https://img.shields.io/github/actions/workflow/status/rhodless/akira-api/ci.yml?style=flat-square&branch=main"></a>
     &nbsp;
