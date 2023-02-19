@@ -4,7 +4,6 @@ import fr.rhodless.akira.uhc.api.game.config.list.*;
 import fr.rhodless.akira.uhc.api.module.Module;
 import fr.rhodless.akira.uhc.api.module.camp.Camp;
 import fr.rhodless.akira.uhc.api.module.role.QuickRoleInfo;
-import fr.rhodless.akira.uhc.api.game.config.list.*;
 
 import java.util.List;
 import java.util.UUID;

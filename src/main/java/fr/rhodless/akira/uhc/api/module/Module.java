@@ -2,8 +2,10 @@ package fr.rhodless.akira.uhc.api.module;
 
 import fr.rhodless.akira.uhc.api.module.camp.Camp;
 import fr.rhodless.akira.uhc.api.module.role.QuickRoleInfo;
+import fr.rhodless.akira.uhc.api.scoreboard.ScoreboardValue;
 import org.bukkit.ChatColor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -142,6 +144,17 @@ public abstract class Module {
      * Méthode appelée lors de l'annonce des rôles
      */
     public void onRoles() {
+    }
+
+    /**
+     * Permet d'ajouter des valeurs au scoreboard.
+     * Rajouter une valeur au scoreboard ne supprime pas la ligne en question,
+     * mais rajoute une ligne en dessous de celle-ci.
+     *
+     * @return les valeurs à afficher dans le scoreboard
+     */
+    public List<ScoreboardValue> getForceScoreboardValues() {
+        return new ArrayList<>();
     }
 
     /**

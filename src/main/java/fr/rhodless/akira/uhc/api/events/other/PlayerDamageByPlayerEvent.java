@@ -1,6 +1,5 @@
 package fr.rhodless.akira.uhc.api.events.other;
 
-import fr.rhodless.akira.uhc.api.API;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
