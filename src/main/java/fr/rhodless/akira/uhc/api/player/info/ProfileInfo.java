@@ -407,12 +407,12 @@ public interface ProfileInfo {
      *
      * @return le nombre de points du joueur
      */
-    int getPoints();
+    float getPoints();
 
     /**
      * Les points ne sont pas utilisés par le plugin, mais peuvent être utilisés par les autres plugins.
      *
      * @param points le nombre de points du joueur
      */
-    void setPoints(int points);
+    void setPoints(float points);
 }

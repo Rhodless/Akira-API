@@ -249,11 +249,13 @@ public abstract class Role implements Listener {
         List<ProfileInfo> list = new ArrayList<>();
         for (UUID uuid : API.getGameHandler().getPlayers()) {
             ProfileInfo profile = API.getPlayerHandler().getProfile(uuid);
-            if (profile != null) {
-                if (profile.getRole() != null && profile.getRole().getClass().getSimpleName().equals(info.getRoleClass().getSimpleName())) {
-                    list.add(profile);
-                }
+            if (profile == null) continue;
+            if (info.getRoleClass() == null) continue;
+
+            if (profile.getRole() != null && profile.getRole().getClass().getSimpleName().equals(info.getRoleClass().getSimpleName())) {
+                list.add(profile);
             }
+
         }
         return list;
     }

@@ -4,6 +4,7 @@ import fr.rhodless.akira.uhc.api.module.camp.Camp;
 import fr.rhodless.akira.uhc.api.module.role.QuickRoleInfo;
 import fr.rhodless.akira.uhc.api.scoreboard.ScoreboardValue;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,13 +148,43 @@ public abstract class Module {
     }
 
     /**
+     * Retourne si le module doit annoncer la mort des joueurs
+     *
+     * @return si le module doit annoncer la mort des joueurs
+     */
+    public boolean shouldAnnounceDeath() {
+        return true;
+    }
+
+    /**
+     * Retourne si le module doit attendre avant de tuer les joueurs.
+     * Par exemple, si un joueur meurt, il ne sera pas tué tout de suite, mais après 10 secondes
+     * si personne ne le sauve.
+     * Si vous ne voulez pas que l'uhc attende, retournez false.
+     *
+     * @return si le module doit attendre avant de tuer les joueurs
+     */
+    public boolean shouldWaitBeforeGameDeath() {
+        return true;
+    }
+
+    /**
+     * Retourne si le module doit drop les items de mort
+     *
+     * @return si le module doit drop les items de mort
+     */
+    public boolean shouldDropDeathStuff() {
+        return true;
+    }
+
+    /**
      * Permet d'ajouter des valeurs au scoreboard.
      * Rajouter une valeur au scoreboard ne supprime pas la ligne en question,
      * mais rajoute une ligne en dessous de celle-ci.
      *
      * @return les valeurs à afficher dans le scoreboard
      */
-    public List<ScoreboardValue> getForceScoreboardValues() {
+    public List<ScoreboardValue> getForceScoreboardValues(Player player) {
         return new ArrayList<>();
     }
 
