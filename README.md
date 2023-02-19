@@ -38,32 +38,23 @@ Enfin, AKIRA est un UHC très complet qui propose une configuration en jeu très
   
 ## Ajouter le projet en dépendance avec Maven
  
-```xml
-<repository>
-  <id>akira</id>
-  <url>https://maven.pkg.github.com/Rhodless/AKIRA-API</url>
-</repository>
-```
+Pas besoin de rajouter une repository pour la dépendance. Celle-ci est disponible sur la centrale de Maven.
    
 ```xml
 <dependency>
-  <groupId>fr.rhodless</groupId>
-  <artifactId>akira-api</artifactId>
+  <groupId>fr.rhodless.akira</groupId>
+  <artifactId>uhc-api</artifactId>
   <version>VERSION</version>
 </dependency>
 ```
 
 ## Ajouter le projet en dépendance avec Gradle
  
-```groovy
-repositories {
-    maven { url 'https://maven.pkg.github.com/Rhodless/AKIRA-API' }
-}
-```
+Pas besoin de rajouter une repository pour la dépendance. Celle-ci est disponible sur la centrale de Maven.
    
 ```groovy
 dependencies {
-    compileOnly 'fr.rhodless:akira-api:VERSION'
+    compileOnly 'fr.rhodless.akira:uhc-api:VERSION'
 }
 ```
 
