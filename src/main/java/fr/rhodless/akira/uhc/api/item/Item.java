@@ -19,18 +19,21 @@ public class Item implements ConfigurationSerializable {
     private final int slot;
     private final boolean onlyHost;
     private final String command;
+    private final boolean spectator;
 
     /**
      * @param itemStack l'item
      * @param slot      la position de l'item
      * @param onlyHost  si l'item est seulement pour l'hôte
      * @param command   la commande à exécuter
+     * @param spectator si l'item est pour les spectateurs
      */
-    public Item(ItemStack itemStack, int slot, boolean onlyHost, String command) {
+    public Item(ItemStack itemStack, int slot, boolean onlyHost, String command, boolean spectator) {
         this.itemStack = itemStack;
         this.slot = slot;
         this.onlyHost = onlyHost;
         this.command = command;
+        this.spectator = spectator;
     }
 
     /**
@@ -69,6 +72,10 @@ public class Item implements ConfigurationSerializable {
         return command;
     }
 
+    public boolean isSpectator() {
+        return spectator;
+    }
+
     /**
      * Permet de serializer l'item pour la configuration bukkit.
      *
@@ -81,6 +88,7 @@ public class Item implements ConfigurationSerializable {
         data.put("slot", slot);
         data.put("onlyHost", onlyHost);
         data.put("command", command);
+        data.put("spectator", spectator);
         return data;
     }
 
@@ -95,7 +103,8 @@ public class Item implements ConfigurationSerializable {
                 (ItemStack) args.get("itemStack"),
                 (int) args.get("slot"),
                 (boolean) args.get("onlyHost"),
-                (String) args.get("command")
+                (String) args.get("command"),
+                (boolean) args.get("spectator")
         );
     }
 }

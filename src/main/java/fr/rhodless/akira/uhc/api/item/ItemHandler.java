@@ -32,5 +32,5 @@ public interface ItemHandler {
      * @param itemStack l'item avec lequel l'interaction a été faite
      * @param player    le joueur qui a fait l'interaction
      */
-    void handleInteraction(ItemStack itemStack, Player player);
+    void handleInteraction(ItemStack itemStack, Player player, boolean spectator);
 }
