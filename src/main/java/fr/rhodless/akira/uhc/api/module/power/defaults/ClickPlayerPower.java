@@ -10,10 +10,6 @@ import org.bukkit.entity.Player;
  * Unauthorized using, copying, modifying and/or distributing of this file,
  * via any medium is strictly prohibited. This code is confidential.
  */
-
-/**
- * Ce pouvoir s'active lorsque le joueur clique sur un joueur avec l'item
- */
 public abstract class ClickPlayerPower extends ItemPower {
     private Player target;
 
