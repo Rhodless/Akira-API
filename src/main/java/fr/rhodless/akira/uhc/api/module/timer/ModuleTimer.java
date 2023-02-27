@@ -14,6 +14,8 @@ public abstract class ModuleTimer {
     private int timer = 0;
     private final String name;
     private int initialDuration;
+    private int minValue;
+    private int maxValue;
 
     /**
      * Lorsque la partie sera lancée, le timer sera initialisé avec cette valeur.
@@ -21,10 +23,14 @@ public abstract class ModuleTimer {
      *
      * @param name            le nom du timer
      * @param initialDuration la durée initiale du timer
+     * @param minValue        la valeur minimale du timer
+     * @param maxValue        la valeur maximale du timer
      */
-    public ModuleTimer(String name, int initialDuration) {
+    public ModuleTimer(String name, int initialDuration, int minValue, int maxValue) {
         this.name = name;
         this.initialDuration = initialDuration;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
     }
 
     /**
@@ -82,5 +88,45 @@ public abstract class ModuleTimer {
      */
     public void setInitialDuration(int initialDuration) {
         this.initialDuration = initialDuration;
+    }
+
+    /**
+     * Permet de récupérer la valeur minimale du timer.
+     * Par exemple, si la valeur minimale est de 2 minutes, l'host ne pourra
+     * pas mettre le timer à moins d'1 minute.
+     *
+     * @return la valeur minimale du timer
+     */
+    public int getMinValue() {
+        return minValue;
+    }
+
+    /**
+     * Permet de définir la valeur minimale du timer
+     *
+     * @param minValue la valeur minimale du timer
+     */
+    public void setMinValue(int minValue) {
+        this.minValue = minValue;
+    }
+
+    /**
+     * Permet de récupérer la valeur maximale du timer.
+     * Par exemple, si la valeur maximale est de 3 minutes, l'host ne pourra
+     * pas mettre le timer à plus de 3 minutes.
+     *
+     * @return la valeur maximale du timer
+     */
+    public int getMaxValue() {
+        return maxValue;
+    }
+
+    /**
+     * Permet de définir la valeur maximale du timer
+     *
+     * @param maxValue la valeur maximale du timer
+     */
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
     }
 }
