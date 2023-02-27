@@ -274,6 +274,23 @@ public interface ProfileInfo {
     void handleDeath(Player killer);
 
     /**
+     * Permet d'envoyer un message de mort au joueur.
+     *
+     * @param reader        le joueur qui recevra le message de mort
+     * @param disconnect    Si le joueur est mort à cause d'une déconnexion
+     * @param announceAfter Combien de temps après la mort doit être envoyé l'annonce de mort
+     */
+    void sendDeathMessage(Player reader, boolean disconnect, int announceAfter);
+
+    /**
+     * Permet d'envoyer un message de mort à tous les joueurs.
+     *
+     * @param disconnect    Si le joueur est mort à cause d'une déconnexion
+     * @param announceAfter Combien de temps après la mort doit être envoyé l'annonce de mort
+     */
+    void sendDeathMessage(boolean disconnect, int announceAfter);
+
+    /**
      * Permet de récupérer le camp du joueur.
      * Le camp est défini lors de l'annonce des rôles.
      *
@@ -394,7 +411,7 @@ public interface ProfileInfo {
     /**
      * Permet d'immobiliser le joueur
      */
-    void stun();
+    void stun(int seconds);
 
     /**
      * Permet de rendre le joueur mobile
