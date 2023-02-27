@@ -214,4 +214,16 @@ public abstract class Module {
     public String getVersion() {
         return version;
     }
+
+    /**
+     * Permet de récupérer le nombre de joueurs que l'uhc doit afficher (sur le scoreboard, le tab, etc)
+     * Si vous ne voulez pas forcer le nombre de joueurs, retournez -1.
+     * Par exemple, si vous désirez afficher le nombre de joueurs vivants + 1,
+     * il faut retourner API.getGameHandler().getPlayers().size() + 1
+     *
+     * @return le nombre de joueurs à forcer
+     */
+    public int overridePlayerCount(Player player) {
+        return -1;
+    }
 }
