@@ -30,6 +30,13 @@ public interface ModuleHandler {
     Module getCurrentModule();
 
     /**
+     * Permet de récupérer l'objet qui contient les commandes du module.
+     *
+     * @return l'objet qui contient les commandes
+     */
+    Object getOtherCommands();
+
+    /**
      * Permet de récupérer la liste des timers enregistrés
      *
      * @return la liste des timers enregistrés
@@ -42,6 +49,16 @@ public interface ModuleHandler {
      * @param timer le timer à enregistrer
      */
     void registerTimer(ModuleTimer timer);
+
+    /**
+     * Permet d'enregistrer une class qui contient des commandes du module.
+     * Par exemple si vous voulez rajouter une commande /module mon_nom_spécial, vous
+     * pouvez créer une class qui contient la commande et l'enregistrer avec cette méthode.
+     * Attention à utiliser les annotations {@link fr.rhodless.akira.uhc.api.command.annotations.SubCommand}.
+     *
+     * @param object l'objet qui contient les commandes
+     */
+    void registerOtherCommands(Object object);
 
     /**
      * Permet de récupérer un timer à partir de sa classe
