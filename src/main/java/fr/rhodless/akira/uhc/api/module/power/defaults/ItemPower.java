@@ -63,8 +63,8 @@ public abstract class ItemPower extends Power {
      */
     protected ItemBuilder format(ItemStack it, String name) {
         String clic = " &7▪ &7Clic";
-        if (this instanceof RightClickPower || this instanceof ClickPlayerPower) clic += "-droit";
-        if (this instanceof LeftClickPower) clic += "-gauche";
+        if (this instanceof RightClickPower || this instanceof RightClickPlayerPower) clic += "-droit";
+        if (this instanceof LeftClickPower || this instanceof LeftClickPlayerPower) clic += "-gauche";
 
         return new ItemBuilder(it).setName("&c&l" + name + clic).addEnchant(Enchantment.DURABILITY, 1).hideItemFlags();
     }
@@ -86,7 +86,17 @@ public abstract class ItemPower extends Power {
      *
      * @return true si le pouvoir doit être donné au joueur
      */
-    public boolean mustGive() {
+    public boolean shouldGiveAtDistribution() {
         return true;
+    }
+
+    /**
+     * Permet de savoir si l'interaction avec l'item doit être annulée.
+     * Par exemple, si l'item est une canne à pêche, alors le clic-droit ne lancera pas la canne à pêche.
+     *
+     * @return true si l'interaction avec l'item doit être annulée
+     */
+    public boolean shouldCancelInteraction() {
+        return false;
     }
 }

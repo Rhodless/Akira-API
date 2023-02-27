@@ -14,7 +14,7 @@
 
     <groupId>fr.rhodless.akira</groupId>
     <artifactId>uhc-api</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.9-beta3</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
