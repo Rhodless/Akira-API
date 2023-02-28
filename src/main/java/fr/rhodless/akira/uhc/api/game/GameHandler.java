@@ -8,7 +8,7 @@ import fr.rhodless.akira.uhc.api.game.start.StartHandler;
 import fr.rhodless.akira.uhc.api.game.state.GameState;
 import fr.rhodless.akira.uhc.api.module.win.WinHandler;
 
-import java.util.List;
+import java.util.Queue;
 import java.util.UUID;
 
 /*
@@ -88,21 +88,21 @@ public interface GameHandler {
      *
      * @return la liste des co-hosts de la partie.
      */
-    List<UUID> getCoHosts();
+    Queue<UUID> getCoHosts();
 
     /**
      * Permet de récupérer la liste des joueurs de la partie.
      *
      * @return la liste des joueurs de la partie.
      */
-    List<UUID> getPlayers();
+    Queue<UUID> getPlayers();
 
     /**
      * Permet de récupérer la liste des whitelistés de la partie.
      *
      * @return la liste des whitelistés de la partie.
      */
-    List<String> getWhitelistedPlayers();
+    Queue<String> getWhitelistedPlayers();
 
     /**
      * Permet de récupérer le game state de la partie.
@@ -134,7 +134,7 @@ public interface GameHandler {
      *
      * @return la liste des joueurs qui ont activé le mode Whiteliset Setup.
      */
-    List<UUID> getWhitelistSetup();
+    Queue<UUID> getWhitelistSetup();
 
     /**
      * Permet de récupérer la durée de la partie.

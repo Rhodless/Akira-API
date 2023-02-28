@@ -212,7 +212,11 @@ public abstract class Role implements Listener {
     protected boolean isRole(Player player) {
         ProfileInfo profile = API.getPlayerHandler().getProfile(player);
 
-        return profile.getRole() != null && profile.getRole().getName().equals(this.getName());
+        if (profile.getRole() == null) {
+            return false;
+        }
+
+        return profile.getRole().equals(this);
     }
 
     /**
