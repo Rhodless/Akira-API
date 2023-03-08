@@ -9,6 +9,7 @@ import fr.rhodless.akira.uhc.api.npc.NPCHandler;
 import fr.rhodless.akira.uhc.api.player.PlayerHandler;
 import fr.rhodless.akira.uhc.api.prefix.PrefixHandler;
 import fr.rhodless.akira.uhc.api.saves.SavedConfigurationHandler;
+import fr.rhodless.akira.uhc.api.scheduler.SchedulerHandler;
 import fr.rhodless.akira.uhc.api.tablist.TabListHandler;
 import fr.rhodless.akira.uhc.api.world.WorldHandler;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -142,6 +143,10 @@ public class API {
         return implementation.getNpcHandler();
     }
 
+    public static SchedulerHandler getSchedulerHandler() {
+        return implementation.getSchedulerHandler();
+    }
+
     public interface Implementation {
         JavaPlugin getPlugin();
 
@@ -166,5 +171,7 @@ public class API {
         NPCHandler getNpcHandler();
 
         ItemHandler getItemHandler();
+
+        SchedulerHandler getSchedulerHandler();
     }
 }
