@@ -1,5 +1,6 @@
 package fr.rhodless.akira.uhc.api.module.power.defaults;
 
+import fr.rhodless.akira.uhc.api.API;
 import fr.rhodless.akira.uhc.api.module.power.Power;
 import fr.rhodless.menu.api.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -62,11 +63,12 @@ public abstract class ItemPower extends Power {
      * @return l'item formaté
      */
     protected ItemBuilder format(ItemStack it, String name) {
-        String clic = " &7▪ &7Clic";
+        String clic = " &7▪ &fClic";
         if (this instanceof RightClickPower || this instanceof RightClickPlayerPower) clic += "-droit";
         if (this instanceof LeftClickPower || this instanceof LeftClickPlayerPower) clic += "-gauche";
 
-        return new ItemBuilder(it).setName("&c&l" + name + clic).addEnchant(Enchantment.DURABILITY, 1).hideItemFlags();
+        return new ItemBuilder(it).setName(API.getModuleHandler().getCurrentModule().getMainColor() + "&l" + name + clic)
+                .addEnchant(Enchantment.DURABILITY, 1).hideItemFlags();
     }
 
     /**
