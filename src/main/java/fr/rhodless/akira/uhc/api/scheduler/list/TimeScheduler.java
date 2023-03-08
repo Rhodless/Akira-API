@@ -15,9 +15,16 @@ public class TimeScheduler extends AbstractScheduler {
     private int ticks = 0;
 
     private final int time;
+    private final Runnable onFinish;
 
     public TimeScheduler(int time) {
         this.time = time;
+        this.onFinish = null;
+    }
+
+    public TimeScheduler(int time, Runnable onFinish) {
+        this.time = time;
+        this.onFinish = onFinish;
     }
 
     public int getTime() {
@@ -26,6 +33,13 @@ public class TimeScheduler extends AbstractScheduler {
 
     @Override
     public boolean onTick(Scheduler scheduler) {
-        return ticks++ != time;
+        if (ticks++ == time) {
+            if (this.onFinish != null) {
+                this.onFinish.run();
+            }
+            return false;
+        }
+
+        return true;
     }
 }

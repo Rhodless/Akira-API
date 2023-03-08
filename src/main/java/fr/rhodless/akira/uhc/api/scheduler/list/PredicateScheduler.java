@@ -15,9 +15,16 @@ import java.util.function.Predicate;
  */
 public class PredicateScheduler extends AbstractScheduler {
     private final Predicate<? super Scheduler> canceler;
+    private final Runnable onFinish;
 
     public PredicateScheduler(Predicate<? super Scheduler> canceler) {
         this.canceler = canceler;
+        this.onFinish = null;
+    }
+
+    public PredicateScheduler(Predicate<? super Scheduler> canceler, Runnable onFinish) {
+        this.canceler = canceler;
+        this.onFinish = onFinish;
     }
 
     public Predicate<? super Scheduler> getCanceler() {
@@ -26,6 +33,13 @@ public class PredicateScheduler extends AbstractScheduler {
 
     @Override
     public boolean onTick(Scheduler scheduler) {
-        return !this.canceler.test(scheduler);
+        if (this.canceler.test(scheduler)) {
+            if (this.onFinish != null) {
+                this.onFinish.run();
+            }
+            return false;
+        }
+
+        return true;
     }
 }
